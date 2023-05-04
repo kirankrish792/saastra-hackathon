@@ -3,13 +3,13 @@ export default function Home() {
     <main class="flex flex-col   text-white mx-auto  h-full ">
       <div class="flex items-end py-28 w-full pl-28">
         <div>
-          <h1 class=" text-8xl tracking-widest">iNSiGHT</h1>
+          <h1 class=" md:text-8xl text-5xl tracking-widest">iNSiGHT</h1>
         </div>
         <div class="text-xl">for people</div>
       </div>
 
       <div
-        class="max-w-7xl mx-auto grid grid-cols-5 p-4 min-h-[500px] items-center mix-blend-lighten"
+        class="max-w-7xl mx-auto md:grid grid-cols-5 p-4 min-h-[500px] items-center mix-blend-lighten"
         style={{
           "background-image": "url(globe.jpg)",
           "background-repeat": "no-repeat",

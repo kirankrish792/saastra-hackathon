@@ -35,7 +35,7 @@ export default function Root() {
           <ErrorBoundary>
             <WebProvider>
               <UserProvider>
-                <nav class="flex justify-end p-4 text-white bg-[#09373f]">
+                <nav class="flex justify-end p-4 text-white bg-[#0C1446]">
                   <A href="/" class="p-4" activeClass="underline">
                     Home
                   </A>
