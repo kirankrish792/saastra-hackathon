@@ -10,12 +10,14 @@ import Web3 from "web3";
 export const UserContext = createContext();
 
 const UserProvider: ParentComponent = (props) => {
-  const [account, setAccount] = createSignal("acc");
+  const [account, setAccount] = createSignal("");
   const ethereum = window.ethereum;
   const web3 = new Web3(ethereum);
 
   onMount(async () => {
-    const accounts = await web3.eth.getAccounts();
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
     setAccount(accounts[0]);
   });
   return (

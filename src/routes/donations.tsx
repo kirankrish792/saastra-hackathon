@@ -13,12 +13,18 @@ export default function Donation() {
 
   setInterval(() => getTotalDonation(), 1000);
 
-  onMount(() => {
+  onMount(async () => {
     getTotalDonation();
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    setAccount(accounts[0]);
+    await getOwner();
   });
 
   const [donation, setDonation] = createSignal(0);
   const [totalDonation, setTotalDonation] = createSignal("");
+  const [owner, setOwner] = createSignal("");
 
   const contractAddress = "0xE921C675e7FFCFCDF833c1a995e7a2Cf0E329566";
 
@@ -57,11 +63,16 @@ export default function Donation() {
     setTotalDonation(() => eth);
   }
 
+  async function getOwner() {
+    let ownerAdd = await contract.methods.government().call();
+    setOwner(() => ownerAdd);
+  }
+
   return (
     <main class="text-center mx-auto text-white p-4">
       <h1 class="text-4xl">Donations</h1>
       <Show when={account} fallback={<div>Refresh the page</div>}>
-       <div class="py-2 text-lg"> User Account : {account}</div>
+        <div class="py-2 text-lg"> User Account : {account}</div>
       </Show>
       <div class="py-4">
         <button class="btn px-4 py-2 my-2 rounded-l-lg" onClick={donate}>
@@ -75,7 +86,10 @@ export default function Donation() {
         />
       </div>
       <div>
-        <button class="bg-[#175873] hover:bg-[#0C1446] px-4 py-2 m-2 rounded-lg" onClick={withdraw}>
+        <button
+          class="bg-[#175873] hover:bg-[#0C1446] px-4 py-2 m-2 rounded-lg"
+          onClick={withdraw}
+        >
           Withdraw
         </button>
       </div>
